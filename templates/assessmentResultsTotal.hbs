@@ -1,29 +1,29 @@
 <div class="results-inner component-inner">
     {{#if title}}
     <div class="results-title component-title">
-        <h4 class="results-title-inner component-title-inner">
+        <div class="h4 results-title-inner component-title-inner accessible-text-block" tabindex="0" role="region">
             {{{title}}}
-        </h4>
+        </div>
     </div>
     {{/if}}
     {{#if body}}
     <div class="results-body component-body">
         <div class="results-body-inner component-body-inner">
-            {{{body}}}
+            {{{a11y_text body}}}
         </div>
     </div>
     {{/if}}
     {{#if completionMessage}}
     <div class="results-feedback component-feedback">
         <div class="results-feedback-inner component-feedback-inner">
-            {{{completionMessage}}}
+            {{{a11y_text completionMessage}}}
         </div>
     </div>
     {{/if}}
     {{#if _isRetryEnabled}}
     <div class="results-retry component-feedback">
         <div class="results-retry-inner component-feedback-inner">
-            {{retryFeedback}}
+            {{a11y_text retryFeedback}}
         </div>
         <div class="results-retry-button">
             <button>{{#if _retry._button}}{{_retry.button}}{{else}}Retry{{/if}}</button>
