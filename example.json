@@ -1,13 +1,4 @@
-adapt-contrib-asessmentResultsTotal
-===================================
-
-A component used to display the total assessment results. It can only be used in conjunction with [adapt-contrib-assessment](https://github.com/adaptlearning/adapt-contrib-assessment). Feedback is worked out in this component and should match the scoreToPass variable from the course.
-
-
-
-####components.json
-
-```json
+//component.json
   {
     "_id":"c-135",
     "_parentId":"b-32",
@@ -45,14 +36,12 @@ A component used to display the total assessment results. It can only be used in
       }
     ]
   },
-```
 
-A description of the attributes is as follows:
+/*
 
-| Attribute                 | Type         | Description|
-| :-------------------------|:-------------|:-----|
-| _completionMessage        | object       | This is an object describing the output feedback |
-| _bands                    | object array | This is an array containing bands of feedback starting at _score |
+{{{feedback}}} is the only attribute specifically available through this component.
+
+Please see https://github.com/adaptlearning/adapt-contrib-assessment for other available assessment attributes "{{{attributes}}}"
 
 
-The {{{attributes}}} available for string replacement are defined in the [assessment extension](https://github.com/adaptlearning/adapt-contrib-assessment) with the addition of the {{{feedback}}} attribute.
+*/

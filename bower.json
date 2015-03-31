@@ -1,0 +1,16 @@
+{
+  "name": "adapt-contrib-assessmentResultsTotal",
+  "version": "0.0.1",
+  "homepage": "https://github.com/adaptlearning/adapt-contrib-assessmentResultsTotal",
+  "authors": [
+    "Dan Ghost <danielghost@kineo.com>",
+    "Oliver Foster <oliver.foster@kineo.com>"
+  ],
+  "description": "A simple core contributed text component",
+  "main": "/js/adapt-contrib-assessmentResultsTotal.js",
+  "keywords": [
+    "adapt-plugin",
+    "adapt-component"
+  ],
+  "license": "GPLv3"
+}

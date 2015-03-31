@@ -1,0 +1,33 @@
+<div class="results-inner component-inner">
+    {{#if title}}
+    <div class="results-title component-title">
+        <h4 class="results-title-inner component-title-inner">
+            {{{title}}}
+        </h4>
+    </div>
+    {{/if}}
+    {{#if body}}
+    <div class="results-body component-body">
+        <div class="results-body-inner component-body-inner">
+            {{{body}}}
+        </div>
+    </div>
+    {{/if}}
+    {{#if completionMessage}}
+    <div class="results-feedback component-feedback">
+        <div class="results-feedback-inner component-feedback-inner">
+            {{{completionMessage}}}
+        </div>
+    </div>
+    {{/if}}
+    {{#if _isRetryEnabled}}
+    <div class="results-retry component-feedback">
+        <div class="results-retry-inner component-feedback-inner">
+            {{retryFeedback}}
+        </div>
+        <div class="results-retry-button">
+            <button>{{#if _retry._button}}{{_retry.button}}{{else}}Retry{{/if}}</button>
+        </div>
+    </div>
+    {{/if}}
+</div>
