@@ -1,33 +1,22 @@
 <div class="results-inner component-inner">
-    {{#if title}}
-    <div class="results-title component-title">
-        <div class="h4 results-title-inner component-title-inner accessible-text-block" tabindex="0" role="region">
-            {{{title}}}
+    {{> component this}}
+    <div class="results-widget component-widget">
+        {{#if completionMessage}}
+        <div class="results-feedback component-feedback">
+            <div class="results-feedback-inner component-feedback-inner">
+                {{{a11y_text completionMessage}}}
+            </div>
         </div>
+        {{/if}}
+        {{#if _isRetryEnabled}}
+        <div class="results-retry component-feedback">
+            <div class="results-retry-inner component-feedback-inner">
+                {{a11y_text retryFeedback}}
+            </div>
+            <div class="results-retry-button">
+                <button>{{#if _retry._button}}{{_retry.button}}{{else}}Retry{{/if}}</button>
+            </div>
+        </div>
+        {{/if}}
     </div>
-    {{/if}}
-    {{#if body}}
-    <div class="results-body component-body">
-        <div class="results-body-inner component-body-inner">
-            {{{a11y_text body}}}
-        </div>
-    </div>
-    {{/if}}
-    {{#if completionMessage}}
-    <div class="results-feedback component-feedback">
-        <div class="results-feedback-inner component-feedback-inner">
-            {{{a11y_text completionMessage}}}
-        </div>
-    </div>
-    {{/if}}
-    {{#if _isRetryEnabled}}
-    <div class="results-retry component-feedback">
-        <div class="results-retry-inner component-feedback-inner">
-            {{a11y_text retryFeedback}}
-        </div>
-        <div class="results-retry-button">
-            <button>{{#if _retry._button}}{{_retry.button}}{{else}}Retry{{/if}}</button>
-        </div>
-    </div>
-    {{/if}}
 </div>
