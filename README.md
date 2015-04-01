@@ -22,10 +22,7 @@ A component used to display the total assessment results. It can only be used in
     "_pageLevelProgress": {
       "_isEnabled": true
     },
-    "_completionMessage" : {
-      "title" : "You have finished the assessments",
-      "message": "You scored {{{scoreAsPercent}}}%. {{{feedback}}}"
-    },
+    "_completionBody": "This component you're reading is a total results component.<br>You have finished the assessments.<br>You scored {{{scoreAsPercent}}}%. {{{feedback}}}",
     "_bands": [
       {
         "_score": 0,
@@ -51,7 +48,7 @@ A description of the attributes is as follows:
 
 | Attribute                 | Type         | Description|
 | :-------------------------|:-------------|:-----|
-| _completionMessage        | object       | This is an object describing the output feedback |
+| _completionBody           | string       | This is an string describing the component's body on assessment completion |
 | _bands                    | object array | This is an array containing bands of feedback starting at _score |
 
 

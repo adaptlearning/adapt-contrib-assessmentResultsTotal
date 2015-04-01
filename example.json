@@ -13,10 +13,7 @@
     "_pageLevelProgress": {
       "_isEnabled": true
     },
-    "_completionMessage" : {
-      "title" : "You have finished the assessments",
-      "message": "You scored {{{scoreAsPercent}}}%. {{{feedback}}}"
-    },
+    "_completionbody": "This component you're reading is a total results component.<br>You have finished the assessments.<br>You scored {{{scoreAsPercent}}}%. {{{feedback}}}",
     "_bands": [
       {
         "_score": 0,

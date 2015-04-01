@@ -63,16 +63,16 @@ define(function(require) {
 
         setFeedback: function() {
 
-            var completionMessage = this.model.get("_completionMessage").message;
+            var completionBody = this.model.get("_completionBody");
             var feedbackBand = this.getFeedbackBand();
 
             var state = this.model.get("_state");
             state.feedbackBand = feedbackBand;
             state.feedback = feedbackBand.feedback;
 
-            completionMessage = this.stringReplace(completionMessage, state);
+            completionBody = this.stringReplace(completionBody, state);
 
-            this.model.set("completionMessage", completionMessage);
+            this.model.set("body", completionBody);
 
         },
 
