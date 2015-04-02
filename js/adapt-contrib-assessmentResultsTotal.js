@@ -5,8 +5,8 @@
 */
 define(function(require) {
 
-	var ComponentView = require('coreViews/componentView');
-	var Adapt = require('coreJS/adapt');
+    var ComponentView = require('coreViews/componentView');
+    var Adapt = require('coreJS/adapt');
 
     var AssessmentResultsTotal = ComponentView.extend({
 
@@ -18,6 +18,17 @@ define(function(require) {
             this.setupEventListeners();
 
             this.model.set('_isVisible', false);
+
+            this.setupModelResetEvent();
+            
+        },
+
+        setupModelResetEvent: function() {
+            if (this.model.onAssessmentsReset) return;
+            this.model.onAssessmentsReset = function(state) {
+                this.reset('hard', true);
+            };
+            this.model.listenTo(Adapt, 'assessments:reset', this.model.onAssessmentsReset);
         },
 
         postRender: function() {
@@ -25,13 +36,11 @@ define(function(require) {
         },
         setupEventListeners: function() {
             this.listenTo(Adapt, 'assessment:complete', this.onAssessmentComplete);
-
             this.listenToOnce(Adapt, 'remove', this.onRemove);
         },
 
         removeEventListeners: function() {;
             this.stopListening(Adapt, 'assessment:complete', this.onAssessmentComplete);
-
             this.stopListening(Adapt, 'remove', this.onRemove);
         },
 
