@@ -11,7 +11,7 @@ define(function(require) {
     var AssessmentResultsTotal = ComponentView.extend({
 
         events: {
-            'inview .component-body': 'onInview'
+            'inview': 'onInview'
         },
 
         preRender: function () {
@@ -66,6 +66,7 @@ define(function(require) {
                 
                 if (this._isVisibleTop || this._isVisibleBottom) {
                     this.setCompletionStatus();
+                    this.$el.off("inview");
                 }
             }
         },
