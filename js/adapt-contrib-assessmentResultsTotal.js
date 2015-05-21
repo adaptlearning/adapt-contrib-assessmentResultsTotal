@@ -16,11 +16,34 @@ define(function(require) {
 
         preRender: function () {
             this.setupEventListeners();
-
-            this.model.set('_isVisible', false);
-
             this.setupModelResetEvent();
-            
+            this.checkIfVisible();            
+        },
+
+        checkIfVisible: function() {
+
+            var wasVisible = this.model.get("_isVisible");
+            var isVisibleBeforeCompletion = this.model.get("_isVisibleBeforeCompletion") || false;
+
+            var isVisible = wasVisible && isVisibleBeforeCompletion;
+
+            if (!isVisibleBeforeCompletion) {
+
+                var assessmentModels = Adapt.assessment.get();
+                if (assessmentModels.length === 0) return;
+
+                var isComplete = false;
+
+                for (var i = 0, item; item = assessmentModels[i++];) {
+                    isComplete = item.get("_isComplete");
+                    if (!isComplete) break;
+                }
+
+                isVisible = isVisible || isComplete;
+
+            }
+
+            this.model.set('_isVisible', isVisible);
         },
 
         setupModelResetEvent: function() {
@@ -48,9 +71,10 @@ define(function(require) {
             this.model.set("_state", state);
             this.setFeedback();
 
-             //show feedback component
-            if(!this.model.get('_isVisible')) this.model.set('_isVisible', true, {pluginName: '_results'});
+            //show feedback component
             this.render();
+            if(!this.model.get('_isVisible')) this.model.set('_isVisible', true);
+            
         },
 
         onInview: function(event, visible, visiblePartX, visiblePartY) {

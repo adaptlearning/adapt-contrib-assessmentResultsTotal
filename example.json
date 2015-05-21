@@ -10,6 +10,7 @@
     "displayTitle":"Total Results",
     "body":"This component you're reading is a total results component.",
     "instruction":"",
+    "_isVisibleBeforeCompletion": true,
     "_pageLevelProgress": {
       "_isEnabled": true
     },
