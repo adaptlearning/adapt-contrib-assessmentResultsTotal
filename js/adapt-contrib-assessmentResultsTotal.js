@@ -42,7 +42,7 @@ define(function(require) {
             this.model.set('_isVisible', isVisible);
 
             // if assessment(s) already complete then render
-            if (isComplete) this.triggerAssessmentsComplete();
+            if (isComplete) this.onAssessmentComplete(Adapt.assessment.getState());
         },
 
         getStatesByAssessmentId: function() {
@@ -54,44 +54,6 @@ define(function(require) {
                 states[state.id] = state;
             }
             return states;
-        },
-
-        triggerAssessmentsComplete:function() {
-            var assessmentsConfig = Adapt.assessment.getAssessmentsConfig();
-
-            var score = 0;
-            var maxScore = 0;
-            var isPass = true;
-            var totalAssessments = 0;
-
-            var states = this.getStatesByAssessmentId();
-
-            for (var id in states) {
-                var state = states[id];
-                totalAssessments++;
-                maxScore += state.maxScore / state.assessmentWeight;
-                score += state.score / state.assessmentWeight;
-                isPass = isPass === false ? false : state.isPass;
-            }
-            
-            var scoreAsPercent = Math.round((score / maxScore) * 100);
-
-            if (assessmentsConfig._scoreToPass || 100) {
-                if (assessmentsConfig._isPercentageBased || true) {
-                    if (scoreAsPercent >= assessmentsConfig._scoreToPass) isPass = true;
-                } else {
-                    if (score >= assessmentsConfig._scoreToPass) isPass = true;
-                }
-            }
-
-            this.onAssessmentComplete({
-                isPercentageBased: assessmentsConfig._isPercentageBased,
-                isPass: isPass,
-                scoreAsPercent: scoreAsPercent,
-                maxScore: maxScore,
-                score: score,
-                assessments: totalAssessments
-            });
         },
 
         setupModelResetEvent: function() {
