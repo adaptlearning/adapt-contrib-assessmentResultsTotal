@@ -45,17 +45,6 @@ define(function(require) {
             if (isComplete) this.onAssessmentComplete(Adapt.assessment.getState());
         },
 
-        getStatesByAssessmentId: function() {
-            var states = {};
-            var assessmentModels = Adapt.assessment.get();
-            for (var i = 0, l = assessmentModels.length; i < l; i++) {
-                var assessmentModel = assessmentModels[i];
-                var state = assessmentModel.getState();
-                states[state.id] = state;
-            }
-            return states;
-        },
-
         setupModelResetEvent: function() {
             if (this.model.onAssessmentsReset) return;
             this.model.onAssessmentsReset = function(state) {
