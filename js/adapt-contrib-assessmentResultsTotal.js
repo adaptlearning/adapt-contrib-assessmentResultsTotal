@@ -45,24 +45,6 @@ define(function(require) {
             if (isComplete) this.triggerAssessmentsComplete();
         },
 
-        getAssessmentsConfig: function () {
-            var assessmentsConfigDefaults = {
-                "_postTotalScoreToLms": true,
-                "_isPercentageBased": true,
-                "_scoreToPass": 100
-            };
-    
-            var assessmentsConfig = Adapt.course.get("_assessment");
-
-            if (assessmentsConfig === undefined) {
-                assessmentsConfig = $.extend(true, {}, assessmentsConfigDefaults);
-            } else {
-                assessmentsConfig = $.extend(true, {}, assessmentsConfigDefaults, assessmentsConfig);
-            }
-
-            return assessmentsConfig;
-        },
-
         getStatesByAssessmentId: function() {
             var states = {};
             var assessmentModels = Adapt.assessment.get();
@@ -75,7 +57,7 @@ define(function(require) {
         },
 
         triggerAssessmentsComplete:function() {
-            var assessmentsConfig = this.getAssessmentsConfig();
+            var assessmentsConfig = Adapt.assessment.getAssessmentsConfig();
 
             var score = 0;
             var maxScore = 0;
