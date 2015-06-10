@@ -17,7 +17,7 @@ define(function(require) {
         preRender: function () {
             this.setupEventListeners();
             this.setupModelResetEvent();
-            this.checkIfVisible();            
+            this.checkIfVisible();
         },
 
         checkIfVisible: function() {
@@ -27,23 +27,89 @@ define(function(require) {
 
             var isVisible = wasVisible && isVisibleBeforeCompletion;
 
-            if (!isVisibleBeforeCompletion) {
+            var assessmentModels = Adapt.assessment.get();
+            if (assessmentModels.length === 0) return;
 
-                var assessmentModels = Adapt.assessment.get();
-                if (assessmentModels.length === 0) return;
+            var isComplete = false;
 
-                var isComplete = false;
-
-                for (var i = 0, item; item = assessmentModels[i++];) {
-                    isComplete = item.get("_isComplete");
-                    if (!isComplete) break;
-                }
-
-                isVisible = isVisible || isComplete;
-
+            for (var i = 0, item; item = assessmentModels[i++];) {
+                isComplete = item.get("_isComplete");
+                if (!isComplete) break;
             }
 
+            if (!isVisibleBeforeCompletion) isVisible = isVisible || isComplete;
+
             this.model.set('_isVisible', isVisible);
+
+            // if assessment(s) already complete then render
+            if (isComplete) this.triggerAssessmentsComplete();
+        },
+
+        getAssessmentsConfig: function () {
+            var assessmentsConfigDefaults = {
+                "_postTotalScoreToLms": true,
+                "_isPercentageBased": true,
+                "_scoreToPass": 100
+            };
+    
+            var assessmentsConfig = Adapt.course.get("_assessment");
+
+            if (assessmentsConfig === undefined) {
+                assessmentsConfig = $.extend(true, {}, assessmentsConfigDefaults);
+            } else {
+                assessmentsConfig = $.extend(true, {}, assessmentsConfigDefaults, assessmentsConfig);
+            }
+
+            return assessmentsConfig;
+        },
+
+        getStatesByAssessmentId: function() {
+            var states = {};
+            var assessmentModels = Adapt.assessment.get();
+            for (var i = 0, l = assessmentModels.length; i < l; i++) {
+                var assessmentModel = assessmentModels[i];
+                var state = assessmentModel.getState();
+                states[state.id] = state;
+            }
+            return states;
+        },
+
+        triggerAssessmentsComplete:function() {
+            var assessmentsConfig = this.getAssessmentsConfig();
+
+            var score = 0;
+            var maxScore = 0;
+            var isPass = true;
+            var totalAssessments = 0;
+
+            var states = this.getStatesByAssessmentId();
+
+            for (var id in states) {
+                var state = states[id];
+                totalAssessments++;
+                maxScore += state.maxScore / state.assessmentWeight;
+                score += state.score / state.assessmentWeight;
+                isPass = isPass === false ? false : state.isPass;
+            }
+            
+            var scoreAsPercent = Math.round((score / maxScore) * 100);
+
+            if (assessmentsConfig._scoreToPass || 100) {
+                if (assessmentsConfig._isPercentageBased || true) {
+                    if (scoreAsPercent >= assessmentsConfig._scoreToPass) isPass = true;
+                } else {
+                    if (score >= assessmentsConfig._scoreToPass) isPass = true;
+                }
+            }
+
+            this.onAssessmentComplete({
+                isPercentageBased: assessmentsConfig._isPercentageBased,
+                isPass: isPass,
+                scoreAsPercent: scoreAsPercent,
+                maxScore: maxScore,
+                score: score,
+                assessments: totalAssessments
+            });
         },
 
         setupModelResetEvent: function() {
