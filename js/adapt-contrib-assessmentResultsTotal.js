@@ -17,7 +17,7 @@ define(function(require) {
         preRender: function () {
             this.setupEventListeners();
             this.setupModelResetEvent();
-            this.checkIfVisible();            
+            this.checkIfVisible();
         },
 
         checkIfVisible: function() {
@@ -27,23 +27,22 @@ define(function(require) {
 
             var isVisible = wasVisible && isVisibleBeforeCompletion;
 
-            if (!isVisibleBeforeCompletion) {
+            var assessmentModels = Adapt.assessment.get();
+            if (assessmentModels.length === 0) return;
 
-                var assessmentModels = Adapt.assessment.get();
-                if (assessmentModels.length === 0) return;
+            var isComplete = false;
 
-                var isComplete = false;
-
-                for (var i = 0, item; item = assessmentModels[i++];) {
-                    isComplete = item.get("_isComplete");
-                    if (!isComplete) break;
-                }
-
-                isVisible = isVisible || isComplete;
-
+            for (var i = 0, item; item = assessmentModels[i++];) {
+                isComplete = item.get("_isComplete");
+                if (!isComplete) break;
             }
 
+            if (!isVisibleBeforeCompletion) isVisible = isVisible || isComplete;
+
             this.model.set('_isVisible', isVisible);
+
+            // if assessment(s) already complete then render
+            if (isComplete) this.onAssessmentComplete(Adapt.assessment.getState());
         },
 
         setupModelResetEvent: function() {
