@@ -27,14 +27,15 @@ define(function(require) {
 
             var isVisible = wasVisible && isVisibleBeforeCompletion;
 
-            var assessmentModels = Adapt.assessment.get();
-            if (assessmentModels.length === 0) return;
+            var assessmentArticleModels = Adapt.assessment.get();
+            if (assessmentArticleModels.length === 0) return;
 
             var isComplete = false;
 
-            for (var i = 0, assessment; assessment = assessmentModels[i++];) {
-                var state = assessment.getState();
-                isComplete = state.isComplete;
+            for (var i = 0, l = assessmentArticleModels; i < l; i++) {
+                var articleModel = assessmentArticleModels[i];) {
+                var assessmentState = articleModel.getState();
+                isComplete = assessmentState.isComplete;
                 if (!isComplete) break;
             }
 
