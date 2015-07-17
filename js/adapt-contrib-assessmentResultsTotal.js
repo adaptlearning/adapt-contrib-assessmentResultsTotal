@@ -30,7 +30,21 @@ define(function(require) {
             var assessmentArticleModels = Adapt.assessment.get();
             if (assessmentArticleModels.length === 0) return;
 
+            var isComplete = this.isComplete();
+
+            if (!isVisibleBeforeCompletion) isVisible = isVisible || isComplete;
+
+            this.model.set('_isVisible', isVisible);
+
+            // if assessment(s) already complete then render
+            if (isComplete) this.onAssessmentComplete(Adapt.assessment.getState());
+        },
+        
+        isComplete: function() {
             var isComplete = false;
+
+            var assessmentArticleModels = Adapt.assessment.get();
+            if (assessmentArticleModels.length === 0) return;
 
             for (var i = 0, l = assessmentArticleModels.length; i < l; i++) {
                 var articleModel = assessmentArticleModels[i];
@@ -39,12 +53,9 @@ define(function(require) {
                 if (!isComplete) break;
             }
 
-            if (!isVisibleBeforeCompletion) isVisible = isVisible || isComplete;
-
-            this.model.set('_isVisible', isVisible);
-
-            // if assessment(s) already complete then render
-            if (isComplete) this.onAssessmentComplete(Adapt.assessment.getState());
+            if (!isComplete) {
+                this.model.reset("hard", true);
+            }
         },
 
         setupModelResetEvent: function() {
