@@ -56,6 +56,8 @@ define(function(require) {
             if (!isComplete) {
                 this.model.reset("hard", true);
             }
+            
+            return isComplete;
         },
 
         setupModelResetEvent: function() {
