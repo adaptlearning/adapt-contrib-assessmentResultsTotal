@@ -33,7 +33,7 @@ define(function(require) {
             var isComplete = false;
 
             for (var i = 0, l = assessmentArticleModels; i < l; i++) {
-                var articleModel = assessmentArticleModels[i];) {
+                var articleModel = assessmentArticleModels[i];
                 var assessmentState = articleModel.getState();
                 isComplete = assessmentState.isComplete;
                 if (!isComplete) break;
