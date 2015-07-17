@@ -32,8 +32,9 @@ define(function(require) {
 
             var isComplete = false;
 
-            for (var i = 0, item; item = assessmentModels[i++];) {
-                isComplete = item.get("_isComplete");
+            for (var i = 0, assessment; assessment = assessmentModels[i++];) {
+                var state = assessment.getState();
+                isComplete = state.isComplete;
                 if (!isComplete) break;
             }
 
