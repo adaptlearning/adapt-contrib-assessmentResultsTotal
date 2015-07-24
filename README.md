@@ -1,6 +1,6 @@
 #adapt-contrib-asessmentResultsTotal
 
-An Adapt core component used to display the total assessment results.
+An Adapt component used to display the total assessment results.
 
 ##Installation
 
