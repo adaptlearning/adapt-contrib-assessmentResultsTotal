@@ -2,113 +2,64 @@
   "type":"object",
   "$schema": "http://json-schema.org/draft-04/schema",
   "id": "http://jsonschema.net",
-  "required":false,
+  "$ref": "http://localhost/plugins/content/component/model.schema",
   "properties":{
-    "pluginLocations": {
-      "type":"object",
+    "_supportedLayout": {
+      "type": "string",
+      "required": true,
+      "enum": ["full-width", "half-width", "both"],
+      "default": "both",
+      "editorOnly": true
+    },
+    "instruction": {
+      "type": "string",
+      "required": false,
+      "default": "",
+      "inputType": "Text",
+      "validators": [],
+      "help": "This is the instruction text"
+    },
+    "_isVisibleBeforeCompletion": {
+      "type":"boolean",
       "required":true,
-      "properties":{
-        "config": {
-          "type":"object"
-        },
-        "course": {
-          "type":"object"
-        },
-        "contentobject": {
-          "type":"object"
-        },
-        "article": {
-          "type":"object",
-          "properties":{
-            "_assessment": {
-              "type":"object",
-              "required":false,
-              "legend": "Assessment",
-              "properties":{
-                "_isEnabled": {
-                  "type":"boolean",
-                  "required":true,
-                  "title": "Enabled",
-                  "inputType": { "type": "Boolean", "options": [false, true]},
-                  "validators": []
-                },
-                "_isPercentageBased": {
-                  "type":"boolean",
-                  "required":true,
-                  "title": "Percentage based",
-                  "inputType": { "type": "Boolean", "options": [false, true]},
-                  "validators": []
-                },
-                "_scoreToPass": {
-                  "type":"number",
-                  "required":false,
-                  "title": "Pass mark",
-                  "inputType": "Number",
-                  "default": 60,
-                  "validators": ["number", "required"]
-                },
-                "_bands": {
-                  "type":"array",
-                  "required":false,
-                  "title": "Feedback bands",
-                  "items": {
-                    "type":"object",
-                    "required":false,
-                    "title": "Items",
-                    "properties":{
-                      "_score": {
-                        "type":"number",
-                        "required":true,
-                        "title": "Score",
-                        "minLength": 1,
-                        "default": "",
-                        "inputType": "Number",
-                        "validators": ["required", "number"]
-                      },
-                      "feedback": {
-                        "type":"string",
-                        "required":true,
-                        "title": "Feedback",
-                        "minLength": 1,
-                        "default": "",
-                        "inputType": "TextArea",
-                        "validators": ["required"]
-                      }
-                    }
-                  }
-                },
-                "_completionMessage": {
-                  "type":"object",
-                  "required":false,
-                  "legend": "Completion Message",
-                  "properties":{
-                    "message": {
-                      "type":"string",
-                      "required":false,
-                      "title": "Message",
-                      "default": "",
-                      "inputType": "TextArea",
-                      "validators": []
-                    },
-                    "title": {
-                      "type":"string",
-                      "required":false,
-                      "default": "",
-                      "title": "Completion title",
-                      "inputType": "Text",
-                      "validators": []
-                    }
-                  }
-                }
-              }
-            }
+      "default": true,
+      "title": "Show before assessment completion",
+      "inputType": {"type": "Boolean", "options": [true, false]},
+      "validators": [],
+      "help": "If set to 'false', this will be hidden until all assessments are completed."
+    },
+    "_completionbody": {
+      "type": "string",
+      "required": false,
+      "default": "",
+      "title": "Feedback Text",
+      "inputType": "Text",
+      "validators": [],
+      "help": "This text overwrites the standard body attribute upon completion of all assessments. It may make use of the following variables: {{{scoreAsPercent}}} and {{{feedback}}}, representing the feedback assigned to the appropriate band."
+    },
+    "_bands": {
+      "type":"array",
+      "required":true,
+      "title": "Bands",
+      "items": {
+        "type":"object",
+        "required":true,
+        "properties":{
+          "_score": {
+            "type":"number",
+            "required":false,
+            "title": "Score",
+            "inputType": "Number",
+            "validators": ["number"],
+            "help": "Enter a value representing the raw score or percentage for the start of the range"
+          },
+          "feedback": {
+            "type": "string",
+            "required": false,
+            "default": "",
+            "inputType": "Text",
+            "validators": []
           }
-        },
-        "block": {
-          "type":"object"
-        },
-        "component": {
-          "type":"object"
         }
       }
     }
