@@ -3,10 +3,7 @@
   "version": "2.0.0",
   "framework": "^2.0.0",
   "homepage": "https://github.com/adaptlearning/adapt-contrib-assessmentResultsTotal",
-  "authors": [
-    "Dan Ghost <danielghost@kineo.com>",
-    "Oliver Foster <oliver.foster@kineo.com>"
-  ],
+  "issues": "https://github.com/adaptlearning/adapt-contrib-assessmentResultsTotal/issues",
   "displayName" : "Assessment Results Total",
   "component" : "assessmentResultsTotal",
   "description": "A component used to display the total assessment results",

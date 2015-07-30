@@ -1,8 +1,3 @@
-/*
-* adapt-contrib-assessmentResultsTotal
-* License - http://github.com/adaptlearning/adapt_framework/LICENSE
-* Maintainers - Daryl Hedley <darylhedley@hotmail.com>, "Oliver Foster <oliver.foster@kineo.com>"
-*/
 define(function(require) {
 
     var ComponentView = require('coreViews/componentView');
