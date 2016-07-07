@@ -1,0 +1,67 @@
+{
+  "type":"object",
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "id": "http://jsonschema.net",
+  "$ref": "http://localhost/plugins/content/component/model.schema",
+  "properties":{
+    "_supportedLayout": {
+      "type": "string",
+      "required": true,
+      "enum": ["full-width", "half-width", "both"],
+      "default": "both",
+      "editorOnly": true
+    },
+    "instruction": {
+      "type": "string",
+      "required": false,
+      "default": "",
+      "inputType": "Text",
+      "validators": [],
+      "help": "This is the instruction text"
+    },
+    "_isVisibleBeforeCompletion": {
+      "type":"boolean",
+      "required":true,
+      "default": true,
+      "title": "Show before assessment completion",
+      "inputType": {"type": "Boolean", "options": [true, false]},
+      "validators": [],
+      "help": "If set to 'false', this will be hidden until all assessments are completed."
+    },
+    "_completionbody": {
+      "type": "string",
+      "required": false,
+      "default": "",
+      "title": "Feedback Text",
+      "inputType": "Text",
+      "validators": [],
+      "help": "This text overwrites the standard body attribute upon completion of all assessments. It may make use of the following variables: {{{scoreAsPercent}}} and {{{feedback}}}, representing the feedback assigned to the appropriate band."
+    },
+    "_bands": {
+      "type":"array",
+      "required":true,
+      "title": "Bands",
+      "items": {
+        "type":"object",
+        "required":true,
+        "properties":{
+          "_score": {
+            "type":"number",
+            "required":false,
+            "title": "Score",
+            "inputType": "Number",
+            "validators": ["number"],
+            "help": "Enter a value representing the raw score or percentage for the start of the range"
+          },
+          "feedback": {
+            "type": "string",
+            "required": false,
+            "default": "",
+            "inputType": "Text",
+            "validators": []
+          }
+        }
+      }
+    }
+  }
+}

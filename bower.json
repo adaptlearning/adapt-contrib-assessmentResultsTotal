@@ -1,0 +1,16 @@
+{
+  "name": "adapt-contrib-assessmentResultsTotal",
+  "version": "2.0.0",
+  "framework": "^2.0.0",
+  "homepage": "https://github.com/adaptlearning/adapt-contrib-assessmentResultsTotal",
+  "issues": "https://github.com/adaptlearning/adapt-contrib-assessmentResultsTotal/issues",
+  "displayName" : "Assessment Results Total",
+  "component" : "assessmentResultsTotal",
+  "description": "A component used to display the total assessment results",
+  "main": "/js/adapt-contrib-assessmentResultsTotal.js",
+  "keywords": [
+    "adapt-plugin",
+    "adapt-component"
+  ],
+  "license": "GPLv3"
+}
