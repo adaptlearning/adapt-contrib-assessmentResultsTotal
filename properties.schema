@@ -28,7 +28,7 @@
       "validators": [],
       "help": "If set to 'false', this will be hidden until all assessments are completed."
     },
-    "_completionbody": {
+    "_completionBody": {
       "type": "string",
       "required": false,
       "default": "",
