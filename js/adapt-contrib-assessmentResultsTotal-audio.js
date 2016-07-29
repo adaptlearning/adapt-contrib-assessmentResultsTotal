@@ -40,7 +40,7 @@ define(function(require) {
             // if assessment(s) already complete then render
             if (isComplete) this.onAssessmentComplete(Adapt.assessment.getState());
         },
-        
+
         isComplete: function() {
             var isComplete = false;
 
@@ -57,7 +57,7 @@ define(function(require) {
             if (!isComplete) {
                 this.model.reset("hard", true);
             }
-            
+
             return isComplete;
         },
 
@@ -87,8 +87,9 @@ define(function(require) {
             this.setFeedback();
 
             //show feedback component
-            if(!this.model.get('_isVisible')) this.model.set('_isVisible', true);
-            
+            this.render();
+            if(!this.model.get('_isVisible')) this.model.set('_isVisible', true, {pluginName: "assessmentResultsTotalAudio"});
+
         },
 
         onInview: function(event, visible, visiblePartX, visiblePartY) {
@@ -101,7 +102,7 @@ define(function(require) {
                     this._isVisibleTop = true;
                     this._isVisibleBottom = true;
                 }
-                
+
                 if (this._isVisibleTop || this._isVisibleBottom) {
                     this.setCompletionStatus();
                     this.$el.off("inview");
@@ -120,7 +121,7 @@ define(function(require) {
 
         toggleAudio: function(event) {
             if (event) event.preventDefault();
- 
+
             if ($(event.currentTarget).hasClass('playing')) {
                 Adapt.trigger('audio:pauseAudio', this.audioChannel);
             } else {
@@ -155,7 +156,7 @@ define(function(require) {
 
             var bands = this.model.get("_bands");
             var scoreAsPercent = state.scoreAsPercent;
-            
+
             for (var i = (bands.length - 1); i >= 0; i--) {
                 if (scoreAsPercent >= bands[i]._score) {
                     return bands[i];
@@ -204,9 +205,9 @@ define(function(require) {
         onRemove: function() {
             this.removeEventListeners();
         }
-        
+
     });
-    
+
     Adapt.register("assessmentResultsTotalAudio", AssessmentResultsTotalAudio);
-    
+
 });
