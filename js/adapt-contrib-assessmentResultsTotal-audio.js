@@ -15,6 +15,7 @@ define(function(require) {
             // Set vars
             this.audioChannel = this.model.get("_audioAssessment")._channel;
             this.elementId = this.model.get("_id");
+            this.audioFile = this.model.get("_audioAssessment")._media.src;
 
             this.setupEventListeners();
             this.setupModelResetEvent();

@@ -20,7 +20,10 @@
       "_showControls": true,
       "_autoplay": true,
       "_channel": 0,
-      "_location": "top-right"
+      "_location": "top-right",
+      "_media": {
+          "src": "course/en/audio/***.mp3"
+      }
     },
     "_bands": [
       {

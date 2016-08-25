@@ -1,6 +1,6 @@
 {
   "name": "adapt-contrib-assessmentResultsTotal-audio",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "framework": "^2.0.0",
   "homepage": "https://github.com/deltanet/adapt-contrib-assessmentResultsTotal-audio",
   "issues": "https://github.com/deltanet/adapt-contrib-assessmentResultsTotal-audio/issues",
@@ -12,5 +12,5 @@
     "adapt-plugin",
     "adapt-component"
   ],
-  "license": "GPL-3.0"
+  "license": "GPLv3"
 }
