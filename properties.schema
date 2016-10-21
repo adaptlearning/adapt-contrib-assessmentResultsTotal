@@ -37,6 +37,81 @@
       "validators": [],
       "help": "This text overwrites the standard body attribute upon completion of all assessments. It may make use of the following variables: {{{scoreAsPercent}}} and {{{feedback}}}, representing the feedback assigned to the appropriate band."
     },
+    "_audioAssessment": {
+      "type":"object",
+      "required":false,
+      "properties":{
+        "_isEnabled": {
+          "type":"boolean",
+          "required":false,
+          "default": false,
+          "title": "Audio Enabled",
+          "inputType": { "type": "Boolean", "options": [false, true]},
+          "validators": [],
+          "help": "Enables Audio on the Component"
+        },
+        "_showControls": {
+          "type":"boolean",
+          "required":false,
+          "default": false,
+          "title": "Show Controls",
+          "inputType": { "type": "Boolean", "options": [false, true]},
+          "validators": [],
+          "help": "Displays the icon controls on the Component"
+        },
+        "_autoplay": {
+          "type":"boolean",
+          "required":false,
+          "default": true,
+          "title": "Autoplay",
+          "inputType": { "type": "Boolean", "options": [false, true]},
+          "validators": [],
+          "help": "Autoplays the audio when in view"
+        },
+        "_autoPlayOnce": {
+          "type":"boolean",
+          "required":false,
+          "default": true,
+          "title": "Autoplay Only Once Enabled",
+          "inputType": { "type": "Boolean", "options": [false, true]},
+          "validators": [],
+          "help": "Only autoplays the audio once when in view"
+        },
+        "_channel": {
+          "type":"number",
+          "required":true,
+          "default":0,
+          "title": "Channel",
+          "inputType":"Number",
+          "validators": ["required", "number"],
+          "help": "Set value to 0 to play the audio clip on the default channel"
+        },
+        "_location": {
+          "type": "string",
+          "required": false,
+          "default": "top-right",
+          "title": "Location",
+          "inputType": "Text",
+          "validators": [],
+          "help": "Set the location of the audio controls. Pre-defined styles are top-left, top-right, bottom-left, bottom-right"
+        },
+        "_media": {
+          "type": "object",
+          "required": true,
+          "properties": {
+            "src": {
+              "type": "string",
+              "required": false,
+              "default": "",
+              "title": "Audio File",
+              "inputType": "Asset:audio",
+              "validators": [],
+              "help": "Audio for when the assessment hasn't been completed"
+            }
+          }
+        }
+      }
+    },
     "_bands": {
       "type":"array",
       "required":true,
@@ -59,6 +134,21 @@
             "default": "",
             "inputType": "Text",
             "validators": []
+          },
+          "_audio": {
+            "type": "object",
+            "required": false,
+            "title": "Audio",
+            "properties":{
+              "src": {
+                "type": "string",
+                "required": false,
+                "default": "",
+                "inputType": "Asset:audio",
+                "validators": [],
+                "help": "Optional audio which will be played with this bands feedback text"
+              }
+            }
           }
         }
       }

@@ -16,6 +16,13 @@ define(function(require) {
             this.audioChannel = this.model.get("_audioAssessment")._channel;
             this.elementId = this.model.get("_id");
             this.audioFile = this.model.get("_audioAssessment")._media.src;
+            this.autoplayOnce = this.model.get('_audioAssessment')._autoPlayOnce;
+
+            if(Adapt.audio.autoPlayGlobal && this.model.get("_audio")._autoplay){
+              this.canAutoplay = true;
+            } else {
+              this.canAutoplay = false;
+            }
 
             this.setupEventListeners();
             this.setupModelResetEvent();
@@ -81,6 +88,7 @@ define(function(require) {
         removeEventListeners: function() {;
             this.stopListening(Adapt, 'assessment:complete', this.onAssessmentComplete);
             this.stopListening(Adapt, 'remove', this.onRemove);
+            this.$el.off("inview");
         },
 
         onAssessmentComplete: function(state) {
@@ -89,12 +97,13 @@ define(function(require) {
 
             //show feedback component
             this.render();
+            this.setFeedback();
             if(!this.model.get('_isVisible')) this.model.set('_isVisible', true, {pluginName: "assessmentResultsTotalAudio"});
 
         },
 
         onInview: function(event, visible, visiblePartX, visiblePartY) {
-            if (visible) {
+            if (visible && this.canAutoplay) {
                 if (visiblePartY === 'top') {
                     this._isVisibleTop = true;
                 } else if (visiblePartY === 'bottom') {
@@ -106,7 +115,6 @@ define(function(require) {
 
                 if (this._isVisibleTop || this._isVisibleBottom) {
                     this.setCompletionStatus();
-                    this.$el.off("inview");
 
                     ///// Audio /////
                     if (this.model.has('_audioAssessment') && this.model.get('_audioAssessment')._isEnabled && Adapt.audio.autoPlayGlobal && this.model.get("_audioAssessment")._autoplay) {
@@ -116,6 +124,11 @@ define(function(require) {
                         }
                     }
                     ///// End of Audio /////
+
+                    // Set to false to stop autoplay when inview again
+                    if(this.autoplayOnce) {
+                      this.canAutoplay = false;
+                    }
                 }
             }
         },
