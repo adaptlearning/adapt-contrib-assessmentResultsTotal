@@ -16,6 +16,13 @@ define(function(require) {
             this.audioChannel = this.model.get("_audioAssessment")._channel;
             this.elementId = this.model.get("_id");
             this.audioFile = this.model.get("_audioAssessment")._media.src;
+            this.autoplayOnce = this.model.get('_audioAssessment')._autoPlayOnce;
+
+            if(Adapt.audio.autoPlayGlobal && this.model.get("_audio")._autoplay){
+              this.canAutoplay = true;
+            } else {
+              this.canAutoplay = false;
+            }
 
             this.setupEventListeners();
             this.setupModelResetEvent();
@@ -96,7 +103,7 @@ define(function(require) {
         },
 
         onInview: function(event, visible, visiblePartX, visiblePartY) {
-            if (visible) {
+            if (visible && this.canAutoplay) {
                 if (visiblePartY === 'top') {
                     this._isVisibleTop = true;
                 } else if (visiblePartY === 'bottom') {
@@ -117,6 +124,11 @@ define(function(require) {
                         }
                     }
                     ///// End of Audio /////
+
+                    // Set to false to stop autoplay when inview again
+                    if(this.autoplayOnce) {
+                      this.canAutoplay = false;
+                    }
                 }
             }
         },

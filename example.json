@@ -19,6 +19,7 @@
       "_isEnabled": true,
       "_showControls": true,
       "_autoplay": true,
+      "_autoPlayOnce": true,
       "_channel": 0,
       "_location": "top-right",
       "_media": {
