@@ -17,7 +17,8 @@
       "default": "",
       "inputType": "Text",
       "validators": [],
-      "help": "This is the instruction text"
+      "help": "This is the instruction text",
+      "translatable": true
     },
     "_isVisibleBeforeCompletion": {
       "type":"boolean",
@@ -35,7 +36,8 @@
       "title": "Feedback Text",
       "inputType": "Text",
       "validators": [],
-      "help": "This text overwrites the standard body attribute upon completion of all assessments. It may make use of the following variables: {{{scoreAsPercent}}} and {{{feedback}}}, representing the feedback assigned to the appropriate band."
+      "help": "This text overwrites the standard body attribute upon completion of all assessments. It may make use of the following variables: {{{scoreAsPercent}}} and {{{feedback}}}, representing the feedback assigned to the appropriate band.",
+      "translatable": true
     },
     "_audioAssessment": {
       "type":"object",
@@ -133,7 +135,8 @@
             "required": false,
             "default": "",
             "inputType": "Text",
-            "validators": []
+            "validators": [],
+            "translatable": true
           },
           "_audio": {
             "type": "object",
