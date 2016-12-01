@@ -12,7 +12,7 @@ For example JSON format, see [example.json](example.json). A description of the 
 
 
 ##Limitations
- 
+
 To be completed.
 
 ##Browser spec
