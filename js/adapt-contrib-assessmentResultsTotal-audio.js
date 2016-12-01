@@ -18,7 +18,7 @@ define(function(require) {
             this.audioFile = this.model.get("_audioAssessment")._media.src;
             this.autoplayOnce = this.model.get('_audioAssessment')._autoPlayOnce;
 
-            if(Adapt.audio.autoPlayGlobal && this.model.get("_audioAssessment")._autoplay){
+            if(Adapt.audio && Adapt.audio.autoPlayGlobal && this.model.get("_audioAssessment")._autoplay){
               this.canAutoplay = true;
             } else {
               this.canAutoplay = false;
