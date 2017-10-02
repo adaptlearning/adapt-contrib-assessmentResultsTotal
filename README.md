@@ -67,7 +67,7 @@ For a guide on the difference between using two curly braces and three curly bra
 No known limitations.  
 
 ----------------------------
-**Version number:**  2.0.7  
+**Version number:**  2.0.8  
 **Framework versions:** 2.0  
 **Author / maintainer:** DeltaNet, forked from [adapt-contrib-assessmentResultsTotal](https://github.com/adaptlearning/adapt-contrib-assessmentResultsTotal)    
 **Accessibility support:** WAI AA   
