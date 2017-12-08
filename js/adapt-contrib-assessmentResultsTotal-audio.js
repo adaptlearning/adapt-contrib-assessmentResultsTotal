@@ -121,7 +121,10 @@ define(function(require) {
             //show feedback component
             this.render();
             this.setFeedback();
-            if(!this.model.get('_isVisible')) this.model.set('_isVisible', true, {pluginName: "assessmentResultsTotalAudio"});
+
+            _.defer(function() {
+              if(!this.model.get('_isVisible')) this.model.set('_isVisible', true, {pluginName: "assessmentResultsTotalAudio"});
+            });
 
         },
 
