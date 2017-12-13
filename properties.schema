@@ -1,0 +1,161 @@
+{
+  "type":"object",
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "id": "http://jsonschema.net",
+  "$ref": "http://localhost/plugins/content/component/model.schema",
+  "properties":{
+    "_supportedLayout": {
+      "type": "string",
+      "required": true,
+      "enum": ["full-width", "half-width", "both"],
+      "default": "both",
+      "editorOnly": true
+    },
+    "instruction": {
+      "type": "string",
+      "required": false,
+      "default": "",
+      "inputType": "Text",
+      "validators": [],
+      "help": "This is the instruction text",
+      "translatable": true
+    },
+    "_isVisibleBeforeCompletion": {
+      "type":"boolean",
+      "required": true,
+      "default": true,
+      "title": "Show before assessment completion",
+      "inputType": "Checkbox",
+      "validators": [],
+      "help": "Controls whether this component will be visible or hidden prior to all the assessments having been completed."
+    },
+    "_completionBody": {
+      "type": "string",
+      "required": false,
+      "default": "",
+      "title": "Feedback Text",
+      "inputType": "TextArea",
+      "validators": [],
+      "help": "This text overwrites the standard body attribute upon completion of all assessments. It may make use of the following variables: {{{scoreAsPercent}}} and {{{feedback}}}, representing the feedback assigned to the appropriate band.",
+      "translatable": true
+    },
+    "_audioAssessment": {
+      "type":"object",
+      "required":false,
+      "properties":{
+        "_isEnabled": {
+          "type":"boolean",
+          "required": false,
+          "default": false,
+          "title": "Audio Is Enabled",
+          "inputType": "Checkbox",
+          "validators": [],
+          "help": "Enables Audio on the Component."
+        },
+        "_showControls": {
+          "type":"boolean",
+          "required": false,
+          "default": false,
+          "title": "Show Controls",
+          "inputType": "Checkbox",
+          "validators": [],
+          "help": "Displays the icon controls on the Component."
+        },
+        "_autoplay": {
+          "type":"boolean",
+          "required": false,
+          "default": true,
+          "title": "Autoplay",
+          "inputType": "Checkbox",
+          "validators": [],
+          "help": "Autoplays the audio when in view."
+        },
+        "_autoPlayOnce": {
+          "type":"boolean",
+          "required": false,
+          "default": true,
+          "title": "Autoplay Only Once Enabled",
+          "inputType": "Checkbox",
+          "validators": [],
+          "help": "Only autoplays the audio once when in view."
+        },
+        "_channel": {
+          "type":"number",
+          "required": true,
+          "default":0,
+          "title": "Channel",
+          "inputType":"Number",
+          "validators": ["required", "number"],
+          "help": "Set value to 0 to play the audio clip on the default channel."
+        },
+        "_location": {
+          "type": "string",
+          "required": false,
+          "default": "top-right",
+          "title": "Location",
+          "inputType": "Text",
+          "validators": [],
+          "help": "Set the location of the audio controls. Pre-defined styles are top-left, top-right, bottom-left, bottom-right."
+        },
+        "_media": {
+          "type": "object",
+          "required": true,
+          "properties": {
+            "src": {
+              "type": "string",
+              "required": false,
+              "default": "",
+              "title": "Audio File",
+              "inputType": "Asset:audio",
+              "validators": [],
+              "help": "Audio for when the assessments haven't been completed."
+            }
+          }
+        }
+      }
+    },
+    "_bands": {
+      "type":"array",
+      "required": true,
+      "title": "Bands",
+      "items": {
+        "type":"object",
+        "required": true,
+        "properties":{
+          "_score": {
+            "type":"number",
+            "required": false,
+            "title": "Score",
+            "inputType": "Number",
+            "validators": ["number"],
+            "help": "Enter a value representing the raw score or percentage for the start of the range."
+          },
+          "feedback": {
+            "type": "string",
+            "required": false,
+            "default": "",
+            "inputType": "TextArea",
+            "validators": [],
+            "translatable": true,
+            "help": "This text will be displayed to the learner when the learner's score falls within this band's range."
+          },
+          "_audio": {
+            "type": "object",
+            "required": false,
+            "title": "Audio",
+            "properties":{
+              "src": {
+                "type": "string",
+                "required": false,
+                "default": "",
+                "inputType": "Asset:audio",
+                "validators": [],
+                "help": "Optional audio which will be played with this bands feedback text."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
