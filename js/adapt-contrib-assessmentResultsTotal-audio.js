@@ -66,7 +66,7 @@ define(function(require) {
 
             if (!isVisibleBeforeCompletion) isVisible = isVisible || isComplete;
 
-            this.model.set('_isVisible', isVisible);
+            this.model.set('_isVisible', true, {pluginName: "assessmentResultsTotalAudio"});
 
             // if assessment(s) already complete then render
             if (isComplete) this.onAssessmentComplete(Adapt.assessment.getState());
@@ -121,11 +121,6 @@ define(function(require) {
             //show feedback component
             this.render();
             this.setFeedback();
-
-            _.defer(function() {
-              if(!this.model.get('_isVisible')) this.model.set('_isVisible', true, {pluginName: "assessmentResultsTotalAudio"});
-            });
-
         },
 
         onInview: function(event, visible, visiblePartX, visiblePartY) {
